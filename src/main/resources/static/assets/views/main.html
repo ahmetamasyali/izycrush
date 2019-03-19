@@ -1,0 +1,39 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><strong>Unanonymous Project</strong></a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class=""><a type="btn" ng-show="!isLoggedIn" class="btn "
+					href="login"> <span class="glyphicon glyphicon-share-alt"></span>Giriş Yap
+				</a></li>
+				<li ng-show="isLoggedIn"><a type="button" class="btn "
+					ng-click="logout()"> <span
+						class="glyphicon glyphicon-share-alt"></span>Çıkış Yap
+				</a></li>
+				<li><a type="button" class="btn " href="#"> <span
+						class="glyphicon glyphicon-shopping-cart"></span>Aşkını İlan Et
+				</a></li>
+				<li><a type="button" class="btn " href="#" ng-show="isLoggedIn"> <span
+						class="glyphicon glyphicon-calendar"></span>Eski Aşklarım
+				</a></li>
+				<li style="margin-left: 60px; margin-top: 15px;"><strong
+					class="pull-right" style="margin-right: 30px">{{username}}</strong></li>
+			</ul>
+
+		</div>
+	</div>
+</nav>
+
+</div>

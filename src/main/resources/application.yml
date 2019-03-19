@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: note-myself-auth
+  datasource:
+    url: jdbc:h2:mem:AZ;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+  data:
+    mongodb:
+      database: izycrush
+      host: localhost
+      port: 27017
+
+security:
+  basic:
+    enabled: false
