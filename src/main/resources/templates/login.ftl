@@ -25,7 +25,7 @@
 	<div class="row main">
 		<div class="panel-heading">
 			<div class="panel-title text-center">
-				<a href="/"><h1 class="title">Unanonymous Project</h1></a>
+				<a href="/"><h1 class="title">Izycrush</h1></a>
 
 				<hr />
 			</div>
