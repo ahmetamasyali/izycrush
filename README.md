@@ -1,3 +1,2 @@
-# rushhourcrush
 
 # izycrush
