@@ -1,23 +1,23 @@
 package com.izycrush.controller;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.util.HtmlUtils;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.izycrush.model.Message;
+import com.izycrush.model.mongo.Message;
+import com.izycrush.model.mongo.User;
+import com.izycrush.rest.IzycrushException;
 
 @Controller
 public class HomeController  extends BaseController {
 	
 	private static final Logger logger = Logger.getLogger(HomeController.class);
-
 	
 	@RequestMapping("/")
 	String home(Model model) {
@@ -31,23 +31,15 @@ public class HomeController  extends BaseController {
 		return "home";
 	}
 
-
-	@MessageMapping("/hello/{conversationId}")
-	@SendTo("/topic/greetings/{conversationId}")
-	public Message greeting(@DestinationVariable String conversationId, SimpMessageHeaderAccessor headerAccessor, String text) throws Exception {
-		Thread.sleep(200); // simulated delay
-		String username = headerAccessor.getUser().getName();
-
-		if(StringUtils.isEmpty(username))
+	@RequestMapping(value = "/loadAllUsers", method = RequestMethod.GET)
+	@ResponseBody
+	public List<User> loadAllUsers() throws IzycrushException
+	{
+		if(!isLoggedIn())
 		{
-			throw new Exception("User must be logged in");
+			throw new IzycrushException("User must be logged in");
 		}
-		Message message = new Message(HtmlUtils.htmlEscape(text), username);
-		return message;
+		return userService.loadAllUsers();
 	}
-
-
-
-	
 	
 }

@@ -4,7 +4,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
+import com.izycrush.model.mongo.User;
 import com.izycrush.service.AuthenticationService;
+import com.izycrush.service.UserService;
 
 
 public abstract class BaseController {
@@ -13,6 +15,9 @@ public abstract class BaseController {
 
 	@Autowired
 	public AuthenticationService authenticationService;
+
+	@Autowired
+	public UserService userService;
 
 
 	public boolean isLoggedIn() {
@@ -23,6 +28,11 @@ public abstract class BaseController {
 	public String getUsername() {
 		logger.debug("getUsername called");
 		return authenticationService.loggedInUsername();
+	}
+
+	public User getUser() {
+		String username = authenticationService.loggedInUsername();
+		return userService.findByUsername(username);
 	}
 
 

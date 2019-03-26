@@ -27,12 +27,16 @@ app.controller('homeCtrl', ['$scope','$http','growl','$sce', function($scope) {
 	$scope.logout = function(){
 		window.location.href = "/logout";
 	}
+
+	$http.get("/loadAllUsers").then(function(success){
+		$scope.allUsers = [];
+		for(var i=0; i < success.data.length ; i++){
+			$scope.allUsers.add(success.data[i]);
+		}
+	});
 }]);
 
 app.controller('chatCtrl', ['$scope','$http','growl','$sce', function($scope, $http, growl, $sce) {
-
-
-
 	$scope.isLoggedIn = isLoggedIn;
 	$scope.username = username;
 
@@ -45,19 +49,12 @@ app.controller('chatCtrl', ['$scope','$http','growl','$sce', function($scope, $h
 	var socket = new SockJS('/gs-guide-websocket');
 	stompClient = Stomp.over(socket);
 	stompClient.connect({}, function (frame) {
-		stompClient.subscribe('/topic/greetings/1', function (greeting) {
+		stompClient.subscribe('/messaging/send/1', function (greeting) {
 			var message = JSON.parse(greeting.body);
 			$scope.messages.push(message);
 			$scope.$apply();
 		});
 	});
-
-	function disconnect() {
-		if (stompClient !== null) {
-			stompClient.disconnect();
-		}
-	}
-
 
 	$scope.messages = [];
 
@@ -68,10 +65,9 @@ app.controller('chatCtrl', ['$scope','$http','growl','$sce', function($scope, $h
 	};
 
 	$scope.sendMessage = function(){
-		stompClient.send("/app/hello/1", {}, $scope.messageModel);
+		stompClient.send("/app/newMessage/1", {}, $scope.messageModel);
 		$scope.messageModel = '';
 	};
-
 
 }]);
 

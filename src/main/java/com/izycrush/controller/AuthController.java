@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.izycrush.enums.Role;
 import com.izycrush.model.Login;
-import com.izycrush.model.User;
+import com.izycrush.model.mongo.User;
 import com.izycrush.rest.BaseResponse;
-import com.izycrush.rest.ResponseMessages;
+import com.izycrush.rest.ErrorCodes;
 import com.izycrush.service.UserService;
 
 @Controller
@@ -59,7 +59,7 @@ public class AuthController extends BaseController {
 				e.printStackTrace();
 				logger.error("error while authentication",e);
 			}
-			return BaseResponse.error(ResponseMessages.WRONG_PASS);
+			return BaseResponse.error(ErrorCodes.WRONG_PASS);
 		}
 
 
@@ -80,11 +80,11 @@ public class AuthController extends BaseController {
 	public BaseResponse register(@RequestBody User user) {
 		if(user.getPassword() != null) {
 			if(!user.getPassword().equals(user.getPasswordConfirm())) {
-				return BaseResponse.error(ResponseMessages.PASSWORDS_NOT_EQUAL);
+				return BaseResponse.error(ErrorCodes.PASSWORDS_NOT_EQUAL);
 			}
 
 		}else {
-			return BaseResponse.error(ResponseMessages.PASSWORD_CANNOT_BE_NULL);
+			return BaseResponse.error(ErrorCodes.PASSWORD_CANNOT_BE_NULL);
 		}
 
 		user.setPasswordHash(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -96,11 +96,11 @@ public class AuthController extends BaseController {
 		}catch(DataIntegrityViolationException e) {
 			logger.error("Username already Exist",e);
 			e.printStackTrace();
-			return BaseResponse.error(ResponseMessages.USERNAME_ALREADY_IN_USE);
+			return BaseResponse.error(ErrorCodes.USERNAME_ALREADY_IN_USE);
 		}catch(Exception e) {
 			logger.error("error while registration",e);
 			e.printStackTrace();
-			return BaseResponse.error(ResponseMessages.ERROR);
+			return BaseResponse.error(ErrorCodes.ERROR);
 		}
 
 		return BaseResponse.success("Success");

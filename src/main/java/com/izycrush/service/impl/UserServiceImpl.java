@@ -1,6 +1,7 @@
 package com.izycrush.service.impl;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -13,8 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.izycrush.enums.Role;
-import com.izycrush.model.User;
-import com.izycrush.repository.UserRepository;
+import com.izycrush.model.mongo.User;
+import com.izycrush.repository.mongo.UserMongoRepository;
 import com.izycrush.service.UserService;
 
 @Service
@@ -22,10 +23,10 @@ public class UserServiceImpl  implements UserDetailsService,UserService {
 
 	private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
 	
-	private UserRepository userRepository;
+	private UserMongoRepository userRepository;
 	
 	
-	public UserServiceImpl(UserRepository userRepository) {
+	public UserServiceImpl(UserMongoRepository userRepository) {
 		this.userRepository = userRepository;
 		
 	}
@@ -50,6 +51,12 @@ public class UserServiceImpl  implements UserDetailsService,UserService {
 		logger.info("user created");
 		
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPasswordHash(), grantedAuthorities);
+	}
+
+	@Override
+	public List<User> loadAllUsers()
+	{
+		return userRepository.loadAllUsers();
 	}
 
 	@Override
