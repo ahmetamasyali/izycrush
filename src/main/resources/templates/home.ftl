@@ -21,7 +21,7 @@
     <link href='https://fonts.googleapis.com/css?family=Oxygen'
           rel='stylesheet' type='text/css'>
 
-    <title>Admin</title>
+    <title>Izycrush</title>
 </head>
 <body ng-app="homeApp" ng-controller="homeCtrl">
 <div growl></div>
@@ -32,12 +32,15 @@
     var username = "${username!}";
 </script>
 <script type="text/javascript" src="assets/js/angular.min.js"></script>
-<script type="text/javascript" src="assets/js/ui-router.min.js"></script>
-<script type="text/javascript" src="assets/js/angular-growl.min.js"></script>
-<script type="text/javascript" src="assets/js/isteven-multi-select.js"></script>
 <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="/webjars/sockjs-client/sockjs.min.js"></script>
 <script type="text/javascript" src="/webjars/stomp-websocket/stomp.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/ui-router.min.js"></script>
+<script type="text/javascript" src="assets/js/angular-growl.min.js"></script>
+<script type="text/javascript" src="assets/js/isteven-multi-select.js"></script>
+
+
 
 <script type="text/javascript"
         src="assets/controller/home-controller.js"></script>

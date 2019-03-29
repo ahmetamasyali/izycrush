@@ -19,7 +19,7 @@
 <link href='https://fonts.googleapis.com/css?family=Oxygen'
 	rel='stylesheet' type='text/css'>
 
-<title>Admin</title>
+<title>Giriş Yap</title>
 </head>
 <body ng-app="loginApp" ng-controller="loginCtrl">
 	<div class="row main">

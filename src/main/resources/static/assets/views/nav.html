@@ -17,14 +17,21 @@
             </li>
             <li class="nav-item active" ng-show="!isLoggedIn">
                 <a class="nav-link" href="login">
-                    <i class="fa fa-sign-in"></i>
+                    <i class="fa fa-sign-in-alt"></i>
                     Giriş Yap
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item active" ng-show="!isLoggedIn">
+                <a class="nav-link" href="register">
+                    <i class="fa fa-users"></i>
+                    Kayıt Ol
                     <span class="sr-only">(current)</span>
                 </a>
             </li>
             <li class="nav-item" ng-show="isLoggedIn">
                 <a class="nav-link" ng-click="goToMessages()">
-                    <i class="fa fa-envelope-o">
+                    <i class="fa fa-envelope">
                         <span class="badge badge-danger">11</span>
                     </i>
                     Mesajlarım

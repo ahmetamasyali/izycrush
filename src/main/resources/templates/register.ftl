@@ -19,7 +19,7 @@
 <link href='https://fonts.googleapis.com/css?family=Oxygen'
 	rel='stylesheet' type='text/css'>
 
-<title>Admin</title>
+<title>Kayıt Ol</title>
 </head>
 <body ng-app="registerApp" ng-controller="registerCtrl">
 	<div class="container">
