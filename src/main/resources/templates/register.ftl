@@ -45,7 +45,7 @@
 								<span class="input-group-addon"><i class="fa fa-user fa"
 									aria-hidden="true"></i></span> <input type="text" class="form-control"
 									ng-model="user.name" name="name" id="name"
-									placeholder="Enter your Name" />
+									placeholder="İsminizi Girin" />
 							</div>
 						</div>
 					</div>
@@ -59,7 +59,7 @@
 								<span class="input-group-addon"><i class="fa fa-users fa"
 									aria-hidden="true"></i></span> <input type="text" class="form-control"
 									ng-model="user.username" name="username" id="username"
-									placeholder="Enter your Username" />
+									placeholder="Kullanıcı Adınızı Girin" />
 							</div>
 						</div>
 					</div>
@@ -71,7 +71,7 @@
 								<span class="input-group-addon"><i
 									class="fa fa-lock fa-lg" aria-hidden="true"></i></span> <input
 									ng-model="user.password" type="password" class="form-control"
-									name="password" id="password" placeholder="Enter your Password" />
+									name="password" id="password" placeholder="Şifrenizi Girin" />
 							</div>
 						</div>
 					</div>
@@ -84,7 +84,7 @@
 									class="fa fa-lock fa-lg" aria-hidden="true"></i></span> <input
 									ng-model="user.passwordConfirm" type="password"
 									class="form-control" name="confirm" id="confirm"
-									placeholder="Confirm your Password" />
+									placeholder="Şifrenizi Doğrulayın" />
 							</div>
 						</div>
 					</div>

@@ -14,7 +14,7 @@ app.controller('loginCtrl',['$scope', '$http', function($scope,$http) {
 			 if(success.data){
 				 if( success.data.status == 'SUCCESS'){
 					 $scope.error = false;
-					 $scope.message = 'SUCCESS';
+					 $scope.message = 'BAŞARILI';
 					 
 					
 					 setTimeout(function() {

@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
     ">
+    <link rel="stylesheet" type="text/css" href="assets/css/angular-growl.css">
 
     <!-- Website CSS style -->
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">

@@ -11,10 +11,10 @@ body, html{
  	margin-top: 70px;
 }
 
-h1.title { 
+h1.title {
 	font-size: 50px;
-	font-family: 'Passion One', cursive; 
-	font-weight: 400; 
+	font-family: 'Passion One', cursive;
+	font-weight: 400;
 }
 
 hr{
@@ -150,7 +150,7 @@ ul.dropdown-cart li .item-left span.item-info{
     float:left;
 }
 ul.dropdown-cart li .item-left span.item-info{
-    margin-left:10px;   
+    margin-left:10px;
 }
 ul.dropdown-cart li .item-left span.item-info span{
     display:block;
@@ -195,7 +195,7 @@ ul.dropdown-cart li .item-right button{
 }
 
 .panel-table .panel-footer .pagination{
-  margin:0; 
+  margin:0;
 }
 
 /*
@@ -216,7 +216,7 @@ used to vertically center elements, may need modification if you're not using de
 }
 
 #main-content{
-    margin-top: 100px;
+    margin-top: 20px;
 }
 
 body,html{
@@ -228,7 +228,6 @@ body,html{
 }
 
 .chat{
-    margin-top: auto;
     margin-bottom: auto;
 }
 .card{
@@ -374,6 +373,7 @@ body,html{
     background-color: #82ccdd;
     padding: 10px;
     position: relative;
+    min-width: 80px;
 }
 .msg_cotainer_send{
     margin-top: auto;
@@ -383,6 +383,7 @@ body,html{
     background-color: #78e08f;
     padding: 10px;
     position: relative;
+    min-width: 80px;
 }
 .msg_time{
     position: absolute;
@@ -558,39 +559,3 @@ body,html{
     }
 }
 
-
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin: auto;
-    text-align: center;
-    font-family: arial;
-    max-width: 300px;
-}
-
-.title {
-    color: grey;
-    font-size: 18px;
-}
-
-.button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #3498DB;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-}
-
-a {
-    text-decoration: none;
-    font-size: 22px;
-    color: black;
-}
-
-button:hover, a:hover {
-    opacity: 0.7;
-}

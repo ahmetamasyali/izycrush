@@ -1,11 +1,27 @@
 <div ng-include="'assets/views/nav.html'"></div>
 
+<section class="container mt-4 mb-4">
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-md-6" ng-repeat="user in allUsers">
+                <div class="d-flex flex-row border rounded">
+                    <div class="p-0 w-25">
+                        <img src="https://via.placeholder.com/448" class="img-thumbnail border-0" />
 
-<div class="card" ng-repeat="user in allUsers">
-    <img src="https://via.placeholder.com/100" alt="John" style="width:100%">
-    <br>
-    <h3><b>{{user.name}}</b></h3>
-    <p class="title">{{user.username}}</p>
+                    </div>
+                    <div class="pl-3 pt-2 pr-2 pb-2 w-75 border-left">
+                        <h4 class="text-primary">{{user.name}}</h4>
+                        <h5 class="text-info">{{user.username}}</h5>
+                        <ul class="m-0 float-left" style="list-style: none; margin:0; padding: 0">
+                            <li><i class="fab fa-facebook-square"></i> Facebook</li>
+                            <li><i class="fab fa-twitter-square"></i> Twitter</li>
+                        </ul>
+                        <p class="text-right m-0"><a ng-click="sendMessage(user.username)" class="btn btn-primary"><i class="far fa-user"></i> Mesaj Gönder</a></p>
+                    </div>
+                </div>
+            </div>
 
-    <p><a ng-click="sendMessage(user.username)" class="button">Mesaj Gönder</a></p>
-</div>
+        </div>
+
+    </div>
+</section>

@@ -19,7 +19,7 @@ app.config([
 		$urlRouterProvider.otherwise('/');
 	}]);
 
-app.controller('homeCtrl', ['$scope','$http','$state', function($scope, $http, $state) {
+app.controller('homeCtrl', ['$scope','$http','$state','growl', function($scope, $http, $state, growl) {
 
 	$scope.isLoggedIn = isLoggedIn;
 	$scope.username = username;
@@ -46,6 +46,18 @@ app.controller('homeCtrl', ['$scope','$http','$state', function($scope, $http, $
 		});
 	};
 
+	$scope.goToMessages = function(){
+		$http.get('/loadConversations/').then(function(response){
+			if(response.data.data && response.data.data[0]){
+				$state.go('chat', {'conversationId': response.data.data[0].id});
+			}
+			else
+			{
+				growl.error("Şu anda bir konuşmaya dahil değilsiniz!");
+			}
+		});
+	};
+
 }]);
 
 app.controller('chatCtrl', ['$scope','$http','growl','$sce','$stateParams','$state', function($scope, $http, growl, $sce, $stateParams, $state) {
@@ -54,6 +66,10 @@ app.controller('chatCtrl', ['$scope','$http','growl','$sce','$stateParams','$sta
 	$scope.conversationId = $stateParams.conversationId;
 	$scope.messages = [];
 
+	$scope.openChat = function(conversationId){
+		$state.go('chat', {'conversationId': conversationId});
+	};
+	$scope.loading = true;
 	if(!isLoggedIn){
 		$state.go('home');
 	} else {
@@ -63,6 +79,14 @@ app.controller('chatCtrl', ['$scope','$http','growl','$sce','$stateParams','$sta
 			for(var i=0; i < $scope.conversation.messages.length ; i++){
 				$scope.messages.push($scope.conversation.messages[i]);
 			}
+			setTimeout(
+				function()
+				{
+					var scroll=$('#message_card');
+					scroll.animate({scrollTop: scroll.prop("scrollHeight")},0);
+					$scope.loading = false;
+				}, 10);
+
 		});
 
 		$http.get('/loadConversations/').then(function(response){
@@ -98,6 +122,25 @@ app.controller('chatCtrl', ['$scope','$http','growl','$sce','$stateParams','$sta
 		$scope.messageModel = '';
 	};
 
+	$scope.onEnterKeyPress = function (event) {
+		if (event.charCode == 13)
+			$scope.sendMessage();
+	};
+
 }]);
 
 
+app.filter('formatdate', function($filter) {
+	return function(timestamp) {
+		var currentDate = new Date()
+		var toFormat = new Date(timestamp)
+		if(toFormat.getDate() == currentDate.getDate() && toFormat.getMonth() == currentDate.getMonth() && toFormat.getFullYear() == currentDate.getFullYear() ) {
+			return 'Bugün ' + $filter('date')(toFormat.getTime(), 'H:mm')
+		}
+		if(toFormat.getDate() == (currentDate.getDate() - 1) && toFormat.getMonth() == currentDate.getMonth() && toFormat.getFullYear() == currentDate.getFullYear()) {
+			return 'Dün ' + $filter('date')(toFormat.getTime(), 'H:mm')
+		}
+
+		return $filter('date')(toFormat.getTime(), 'EEEE H:mm')
+	}
+})
