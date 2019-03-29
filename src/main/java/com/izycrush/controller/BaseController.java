@@ -2,6 +2,7 @@ package com.izycrush.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.util.StringUtils;
 
 import com.izycrush.model.mongo.User;
@@ -17,6 +18,7 @@ public abstract class BaseController {
 	public AuthenticationService authenticationService;
 
 	@Autowired
+	@Qualifier("userServiceImpl")
 	public UserService userService;
 
 

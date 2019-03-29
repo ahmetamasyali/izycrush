@@ -56,4 +56,10 @@ public class MessageServiceImpl implements MessageService
 	{
 		return messageRepository.getLastByUserId(userId);
 	}
+
+	@Override
+	public Message getLastByConversationId(String conversationId)
+	{
+		return messageRepository.getLastByUserId(conversationId);
+	}
 }

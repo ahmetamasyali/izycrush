@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.izycrush.model.mongo.Conversation;
 import com.izycrush.model.mongo.Message;
 import com.izycrush.model.mongo.User;
+import com.izycrush.rest.BaseResponse;
 import com.izycrush.rest.IzycrushException;
 import com.izycrush.service.ConversationService;
 import com.izycrush.service.MessageService;
@@ -35,30 +36,41 @@ public class MessagingController extends BaseController {
 
 	@RequestMapping(value = "/loadConversationMessages/{conversationId}", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Message> loadConversationMessages(@PathVariable("conversationId")  String conversationId) throws IzycrushException
+	public BaseResponse<List<Message>> loadConversationMessages(@PathVariable("conversationId")  String conversationId) throws IzycrushException
 	{
 		User user = getUser();
-		return messageService.loadConversationMessages(user, conversationId);
+		return BaseResponse.success(messageService.loadConversationMessages(user, conversationId));
 	}
 
 	@RequestMapping(value = "/loadConversations", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Conversation> loadConversations()
+	public BaseResponse<List<Conversation>> loadConversations()
 	{
 		User user = getUser();
-		return conversationService.getByUserId(user.id);
+		return BaseResponse.success(conversationService.getByUserId(user.id));
+	}
+
+	@RequestMapping(value = "/loadConversation/{conversationId}", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseResponse<Conversation> loadConversation(@PathVariable("conversationId") String conversationId) throws IzycrushException
+	{
+		User user = getUser();
+		Conversation conversation = conversationService.loadConversationWithMessages(conversationId, user);
+
+		return BaseResponse.success(conversation);
 	}
 
 	@RequestMapping(value = "/createNewConversation/{targetUsername}", method = RequestMethod.POST)
 	@ResponseBody
-	public String createNewConversation(@PathVariable("targetUsername")  String targetUsername) throws IzycrushException
+	public BaseResponse<String> createNewConversation(@PathVariable("targetUsername")  String targetUsername) throws IzycrushException
 	{
 		User user = getUser();
-		return conversationService.createConversation(user, targetUsername);
+		BaseResponse response = BaseResponse.success(conversationService.createConversation(user, targetUsername));
+		return response;
 	}
 
 	@MessageMapping("/newMessage/{conversationId}")
-	@SendTo("/messaging/send/{conversationId}")
+	@SendTo("/topic/messaging/send/{conversationId}")
 	public Message messagingSocket(@DestinationVariable String conversationId, SimpMessageHeaderAccessor headerAccessor, String text) throws Exception {
 		Thread.sleep(50); // simulated delay
 		String username = headerAccessor.getUser().getName();
@@ -69,6 +81,7 @@ public class MessagingController extends BaseController {
 		}
 		logger.info("new message to conversation: " + conversationId);
 		Message message = conversationService.addNewMessage(conversationId, username, text);
+		message.setSender(userService.findById(message.getSenderUserId()));
 
 		return message;
 	}

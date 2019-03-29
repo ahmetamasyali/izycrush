@@ -3,6 +3,7 @@ package com.izycrush.model.mongo;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
@@ -20,6 +21,9 @@ public class Message
 	private Date sentDate;
 
 	private String value;
+
+	@Transient
+	private User sender;
 
 	public Message() {}
 
@@ -61,5 +65,15 @@ public class Message
 	public void setValue(String value)
 	{
 		this.value = value;
+	}
+
+	public User getSender()
+	{
+		return sender;
+	}
+
+	public void setSender(User sender)
+	{
+		this.sender = sender;
 	}
 }

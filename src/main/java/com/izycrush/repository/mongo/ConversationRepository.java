@@ -16,4 +16,5 @@ public interface ConversationRepository
 
 	Conversation getById(String conversationId);
 
+	Conversation getByTwoUserId(String userId1, String userId2);
 }

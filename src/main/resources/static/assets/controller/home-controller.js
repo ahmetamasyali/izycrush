@@ -11,7 +11,7 @@ app.config([
 			templateUrl: "assets/views/main.html",
 			controller: "homeCtrl"
 		}).state('chat', {
-			url: '/chat',
+			url: '/chat/:conversationId',
 			templateUrl: "assets/views/chat.html",
 			controller: "chatCtrl"
 		});
@@ -19,7 +19,7 @@ app.config([
 		$urlRouterProvider.otherwise('/');
 	}]);
 
-app.controller('homeCtrl', ['$scope','$http','growl','$sce', function($scope) {
+app.controller('homeCtrl', ['$scope','$http','$state', function($scope, $http, $state) {
 
 	$scope.isLoggedIn = isLoggedIn;
 	$scope.username = username;
@@ -28,35 +28,64 @@ app.controller('homeCtrl', ['$scope','$http','growl','$sce', function($scope) {
 		window.location.href = "/logout";
 	}
 
-	$http.get("/loadAllUsers").then(function(success){
-		$scope.allUsers = [];
-		for(var i=0; i < success.data.length ; i++){
-			$scope.allUsers.add(success.data[i]);
-		}
-	});
+	if(isLoggedIn){
+		$http.get("/loadAllUsers").then(function(response){
+			$scope.allUsers = [];
+			for(var i=0; i < response.data.data.length ; i++){
+				if(response.data.data[i].username !== $scope.username ){
+					$scope.allUsers.push(response.data.data[i]);
+				}
+
+			}
+		});
+	}
+
+	$scope.sendMessage = function(username){
+		$http.post('/createNewConversation/' + username,{}).then(function(response){
+			$state.go('chat', {'conversationId': response.data.data});
+		});
+	};
+
 }]);
 
-app.controller('chatCtrl', ['$scope','$http','growl','$sce', function($scope, $http, growl, $sce) {
+app.controller('chatCtrl', ['$scope','$http','growl','$sce','$stateParams','$state', function($scope, $http, growl, $sce, $stateParams, $state) {
 	$scope.isLoggedIn = isLoggedIn;
 	$scope.username = username;
+	$scope.conversationId = $stateParams.conversationId;
+	$scope.messages = [];
+
+	if(!isLoggedIn){
+		$state.go('home');
+	} else {
+		$http.get('/loadConversation/' + $scope.conversationId).then(function(response){
+			$scope.conversation = response.data.data;
+
+			for(var i=0; i < $scope.conversation.messages.length ; i++){
+				$scope.messages.push($scope.conversation.messages[i]);
+			}
+		});
+
+		$http.get('/loadConversations/').then(function(response){
+			$scope.allConversations = response.data.data;
+		});
+
+	}
 
 	$scope.logout = function(){
 		window.location.href = "/logout";
-	}
+	};
 
 	var stompClient = null;
 
-	var socket = new SockJS('/gs-guide-websocket');
+	var socket = new SockJS('/messaging-socket');
 	stompClient = Stomp.over(socket);
 	stompClient.connect({}, function (frame) {
-		stompClient.subscribe('/messaging/send/1', function (greeting) {
-			var message = JSON.parse(greeting.body);
+		stompClient.subscribe('/topic/messaging/send/'+ $scope.conversationId, function (response) {
+			var message = JSON.parse(response.body);
 			$scope.messages.push(message);
 			$scope.$apply();
 		});
 	});
-
-	$scope.messages = [];
 
 	$scope.renderHTML = function(html_code)
 	{
@@ -65,7 +94,7 @@ app.controller('chatCtrl', ['$scope','$http','growl','$sce', function($scope, $h
 	};
 
 	$scope.sendMessage = function(){
-		stompClient.send("/app/newMessage/1", {}, $scope.messageModel);
+		stompClient.send("/app/newMessage/" + $scope.conversationId, {}, $scope.messageModel);
 		$scope.messageModel = '';
 	};
 

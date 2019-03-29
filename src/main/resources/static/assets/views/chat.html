@@ -15,66 +15,19 @@
                 </div>
                 <div class="card-body contacts_body">
                     <ui class="contacts">
-                        <li class="active">
+                        <li class="active" ng-repeat="otherConversation in allConversations" ui-sref="chat({conversationId: 'otherConversation.id'})">
                             <div class="d-flex bd-highlight">
                                 <div class="img_cont">
                                     <img src="https://via.placeholder.com/150" class="rounded-circle user_img_msg">
                                     <span class="online_icon"></span>
                                 </div>
                                 <div class="user_info">
-                                    <span>Maryam Naz</span>
-                                    <p>Maryam is online</p>
+                                    <span>{{otherConversation.speakingPerson.name}}</span>
+                                    <p>{{otherConversation.speakingPerson.name}} is online</p>
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div class="d-flex bd-highlight">
-                                <div class="img_cont">
-                                    <img src="https://via.placeholder.com/150" class="rounded-circle user_img_msg">
-                                    <span class="online_icon offline"></span>
-                                </div>
-                                <div class="user_info">
-                                    <span>Sahar Darya</span>
-                                    <p>Sahar left 7 mins ago</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex bd-highlight">
-                                <div class="img_cont">
-                                    <img src="https://via.placeholder.com/150" class="rounded-circle user_img_msg">
-                                    <span class="online_icon"></span>
-                                </div>
-                                <div class="user_info">
-                                    <span>Yolduz Rafi</span>
-                                    <p>Yolduz is online</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex bd-highlight">
-                                <div class="img_cont">
-                                    <img src="https://via.placeholder.com/150" class="rounded-circle user_img_msg">
-                                    <span class="online_icon offline"></span>
-                                </div>
-                                <div class="user_info">
-                                    <span>Nargis Hawa</span>
-                                    <p>Nargis left 30 mins ago</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex bd-highlight">
-                                <div class="img_cont">
-                                    <img src="https://via.placeholder.com/150" class="rounded-circle user_img_msg">
-                                    <span class="online_icon offline"></span>
-                                </div>
-                                <div class="user_info">
-                                    <span>Khadija Mehr</span>
-                                    <p>Khadija left 50 mins ago</p>
-                                </div>
-                            </div>
-                        </li>
+
                     </ui>
                 </div>
                 <div class="card-footer"></div>
@@ -88,7 +41,7 @@
                                 <span class="online_icon"></span>
                             </div>
                             <div class="user_info">
-                                <span>Chat with Maryam Naz</span>
+                                <span>Chat with {{conversation.speakingPerson.username}}</span>
                                 <p>1767 Messages</p>
                             </div>
                         </div>
@@ -105,15 +58,15 @@
                     <div class="card-body msg_card_body">
                         <div class="d-flex justify-content-start mb-4" ng-repeat="message in messages">
 
-                            <div class="img_cont_msg" ng-show="message.username != username">
+                            <div class="img_cont_msg" ng-show="message.sender.username != username">
                                 <img src="https://via.placeholder.com/150" class="rounded-circle user_img_msg">
                             </div>
-                            <div ng-show="message.username != username" class="msg_cotainer"
+                            <div ng-show="message.sender.username != username" class="msg_cotainer"
                                  ng-bind-html="renderHTML(message.value)">
 
                                 <span class="msg_time">8:40 AM, Today</span></div>
 
-                            <div ng-show="message.username == username">
+                            <div ng-show="message.sender.username == username">
                                 <div class="d-flex justify-content-end mb-4">
                                     <div class="msg_cotainer_send" ng-bind-html="renderHTML(message.value)">
 

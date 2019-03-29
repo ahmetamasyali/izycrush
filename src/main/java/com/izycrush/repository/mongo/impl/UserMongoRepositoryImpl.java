@@ -31,6 +31,14 @@ public class UserMongoRepositoryImpl implements UserMongoRepository
 	}
 
 	@Override
+	public User findById(String id)
+	{
+		Query query = new Query(Criteria.where("id").is(id));
+
+		return mongoTemplate.findOne(query, User.class);
+	}
+
+	@Override
 	public User save(User user)
 	{
 		mongoTemplate.save(user);

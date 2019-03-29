@@ -9,6 +9,8 @@ public interface UserMongoRepository
 
 	User findByUsername(String username);
 
+	User findById(String id);
+
 	User save(User user);
 
 	List<User> loadAllUsers();

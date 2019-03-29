@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.izycrush.enums.Role;
 
 @Document(collection = "user")
@@ -19,8 +20,10 @@ public class User{
 	@Indexed(unique = true)
 	private String username;
 
+	@JsonIgnore
 	private String passwordHash;
 
+	@JsonIgnore
     private Set<Role> roles;
 	 
 	@Transient

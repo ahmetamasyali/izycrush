@@ -1,7 +1,6 @@
 package com.izycrush.repository.mongo.impl;
 
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +53,16 @@ public class ConversationMongoRepositoryImpl implements ConversationRepository
 		Query query = new Query(Criteria.where("userIds").in(userId));
 
 		return mongoTemplate.find(query, Conversation.class);
+	}
+
+	@Override
+	public Conversation getByTwoUserId(String userId1, String userId2)
+	{
+		Query query = new Query(Criteria.where("userIds").in(userId1)
+				.andOperator(Criteria.where("userIds").in(userId2),
+						Criteria.where("userIds").size(2)));
+
+		return mongoTemplate.findOne(query, Conversation.class);
 	}
 
 	@Override

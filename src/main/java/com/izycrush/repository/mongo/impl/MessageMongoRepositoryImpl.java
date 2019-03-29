@@ -35,7 +35,7 @@ public class MessageMongoRepositoryImpl implements MessageRepository
 	@Override
 	public List<Message> getByConversationId(String conversationId)
 	{
-		Query query = new Query(Criteria.where(conversationId).is(conversationId));
+		Query query = new Query(Criteria.where("conversationId").is(conversationId));
 		query.with(new Sort(Direction.ASC, "sentDate"));
 		return mongoTemplate.find(query, Message.class);
 	}
@@ -45,6 +45,14 @@ public class MessageMongoRepositoryImpl implements MessageRepository
 	{
 		Query query = new Query(Criteria.where(userId).is(userId));
 		query.with(new Sort(Direction.DESC, "conversationId"));
+		return mongoTemplate.findOne(query, Message.class);
+	}
+
+	@Override
+	public Message getLastByConversationId(String conversationId)
+	{
+		Query query = new Query(Criteria.where(conversationId).is(conversationId));
+		query.with(new Sort(Direction.DESC, "sentDate"));
 		return mongoTemplate.findOne(query, Message.class);
 	}
 

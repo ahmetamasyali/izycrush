@@ -18,4 +18,6 @@ public interface ConversationService
 	List<Conversation> getByUserId(String userId);
 
 	Conversation getById(String conversationId);
+
+	Conversation loadConversationWithMessages(String conversationId, User loggedInUser)  throws IzycrushException;
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.izycrush.model.mongo.Conversation;
@@ -22,6 +23,7 @@ public class ConversationServiceImpl implements ConversationService
 {
 
 	@Autowired
+	@Qualifier("userServiceImpl")
 	private UserService userService;
 
 	@Autowired
@@ -64,7 +66,14 @@ public class ConversationServiceImpl implements ConversationService
 	{
 		User targetUser = userService.findByUsername(targetUsername);
 
-		Conversation conversation = new Conversation();
+		Conversation conversation = conversationRepository.getByTwoUserId(loggedInUser.id, targetUser.id);
+
+		if(conversation != null)
+		{
+			return conversation.id;
+		}
+
+		conversation = new Conversation();
 		conversation.setLastMessageDate(null);
 		conversation.setCreatedDate(new Date());
 		conversation.setUserIds(new ArrayList<>());
@@ -89,13 +98,48 @@ public class ConversationServiceImpl implements ConversationService
 	@Override
 	public List<Conversation> getByUserId(String userId)
 	{
-		return conversationRepository.getByUserId(userId);
+		List<Conversation> conversations = conversationRepository.getByUserId(userId);
+
+		for(Conversation conversation : conversations)
+		{
+			for(String conversationUserId : conversation.getUserIds())
+			{
+				if(!conversationUserId.equals(userId))
+				{
+					conversation.setSpeakingPerson(userService.findById(conversationUserId));
+				}
+				conversation.setLastMessage(messageService.getLastByConversationId(conversation.id));
+			}
+		}
+		return conversations;
 	}
 
 	@Override
 	public Conversation getById(String conversationId)
 	{
 		return conversationRepository.getById(conversationId);
+	}
+
+	@Override
+	public Conversation loadConversationWithMessages(String conversationId, User loggedInUser) throws IzycrushException
+	{
+		Conversation conversation = this.getById(conversationId);
+
+		for(String userId : conversation.getUserIds())
+		{
+			if(!userId.equals(loggedInUser.id))
+			{
+				conversation.setSpeakingPerson(userService.findById(userId));
+			}
+		}
+		conversation.setMessages(messageService.loadConversationMessages(loggedInUser, conversation.id));
+
+		for(Message message : conversation.getMessages())
+		{
+			message.setSender(userService.findById(message.getSenderUserId()));
+		}
+
+		return conversation;
 	}
 
 	private String saveConversation(Conversation conversation)

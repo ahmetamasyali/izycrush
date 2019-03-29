@@ -4,22 +4,24 @@ import com.izycrush.enums.Status;
 
 
 
-public class BaseResponse {
+public class BaseResponse<T> {
 
-	private Object data;
+	private T data;
 	
 	private Status status;
 	
 	private String message;
-	
-	public BaseResponse(Status status, String message, Object data) {
+
+
+	public BaseResponse(Status status, String message, T data) {
 		this.data = data;
 		this.message = message;
 		this.status = status;
 	}
 
-	public static BaseResponse success(String message) {
-		return new BaseResponse(Status.SUCCESS,message,null);
+	public static BaseResponse success(Object data) {
+		BaseResponse response = new BaseResponse(Status.SUCCESS, "Success", data);
+		return response;
 	}
 
 	public static BaseResponse error(String message) {
@@ -27,11 +29,11 @@ public class BaseResponse {
 	}
 
 
-	public Object getData() {
+	public T getData() {
 		return data;
 	}
 
-	public void setData(Object data) {
+	public void setData(T data) {
 		this.data = data;
 	}
 

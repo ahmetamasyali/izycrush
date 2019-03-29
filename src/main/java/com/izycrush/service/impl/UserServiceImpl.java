@@ -64,6 +64,12 @@ public class UserServiceImpl  implements UserDetailsService,UserService {
 		logger.debug("findByUsername called");
 		return userRepository.findByUsername(username);
 	}
+
+	@Override
+	public User findById(String id) {
+		logger.debug("findByUsername called");
+		return userRepository.findById(id);
+	}
 	
 
 	

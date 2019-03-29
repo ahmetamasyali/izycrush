@@ -13,4 +13,6 @@ public interface MessageService
 	List<Message> loadConversationMessages(User user, String conversationId) throws IzycrushException;
 
 	Message getLastByUserId(String userId) throws IzycrushException;
+
+	Message getLastByConversationId(String conversationId);
 }
