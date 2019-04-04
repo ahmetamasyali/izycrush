@@ -30,6 +30,7 @@
 <script type="text/javascript">
     var isLoggedIn = ${isLoggedIn?c};
     var username = "${username!}";
+    var surveyFilled = ${surveyFilled?c};
 </script>
 <script type="text/javascript" src="assets/js/angular.min.js"></script>
 <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
@@ -40,9 +41,8 @@
 <script type="text/javascript" src="assets/js/angular-growl.min.js"></script>
 <script type="text/javascript" src="assets/js/isteven-multi-select.js"></script>
 
-
-
-<script type="text/javascript"
-        src="assets/controller/home-controller.js"></script>
+<script type="text/javascript" src="assets/controller/home-controller.js"></script>
+<script type="text/javascript" src="assets/controller/chat-controller.js"></script>
+<script type="text/javascript" src="assets/controller/survey-controller.js"></script>
 </body>
 </html>

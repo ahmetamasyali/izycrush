@@ -59,7 +59,7 @@ public class SurveyController extends BaseController {
 
 	@RequestMapping(value = "/saveSurvey", method = RequestMethod.POST)
 	@ResponseBody
-	public BaseResponse<Boolean> loadConversation(@RequestBody List<Survey> surveys) throws IzycrushException
+	public BaseResponse<Boolean> saveSurvey(@RequestBody List<Survey> surveys) throws IzycrushException
 	{
 		User user = getUser();
 

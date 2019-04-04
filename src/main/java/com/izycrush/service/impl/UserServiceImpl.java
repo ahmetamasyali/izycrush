@@ -61,12 +61,14 @@ public class UserServiceImpl  implements UserDetailsService,UserService {
 	@Override
 	public List<User> loadAllUsers(User loggedInUser)
 	{
-		List<User> users = userRepository.loadAllUsers();
+		List<User> userList = userRepository.loadAllUsers();
 
-		for(User user : users)
+		for(User user : userList)
 		{
 			user.setMatchPoint(surveyService.calculateMatchPoint(loggedInUser, user));
 		}
+
+		userList.sort((u1, u2) -> u1.getMatchPoint().compareTo(u2.getMatchPoint()));
 		return userRepository.loadAllUsers();
 	}
 
