@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,13 +17,17 @@ import org.springframework.transaction.annotation.Transactional;
 import com.izycrush.enums.Role;
 import com.izycrush.model.mongo.User;
 import com.izycrush.repository.mongo.UserMongoRepository;
+import com.izycrush.service.SurveyService;
 import com.izycrush.service.UserService;
 
 @Service
 public class UserServiceImpl  implements UserDetailsService,UserService {
 
 	private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
-	
+
+	@Autowired
+	private SurveyService surveyService;
+
 	private UserMongoRepository userRepository;
 	
 	
@@ -54,8 +59,14 @@ public class UserServiceImpl  implements UserDetailsService,UserService {
 	}
 
 	@Override
-	public List<User> loadAllUsers()
+	public List<User> loadAllUsers(User loggedInUser)
 	{
+		List<User> users = userRepository.loadAllUsers();
+
+		for(User user : users)
+		{
+			user.setMatchPoint(surveyService.calculateMatchPoint(loggedInUser, user));
+		}
 		return userRepository.loadAllUsers();
 	}
 

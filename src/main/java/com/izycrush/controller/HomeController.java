@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.izycrush.model.mongo.User;
 import com.izycrush.rest.BaseResponse;
 import com.izycrush.rest.IzycrushException;
+import com.izycrush.service.UserService;
 
 @Controller
 public class HomeController  extends BaseController {
@@ -38,7 +39,9 @@ public class HomeController  extends BaseController {
 		{
 			throw new IzycrushException("User must be logged in");
 		}
-		return BaseResponse.success(userService.loadAllUsers());
+
+		User user = getUser();
+		return BaseResponse.success(userService.loadAllUsers(user));
 	}
 	
 }

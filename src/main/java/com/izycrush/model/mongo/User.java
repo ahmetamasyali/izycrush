@@ -32,6 +32,9 @@ public class User{
 	@Transient
 	private String passwordConfirm;
 
+	@Transient
+	private Double matchPoint;
+
 	public User() {}
 
 	public String getName() {
@@ -82,5 +85,13 @@ public class User{
 		this.passwordConfirm = passwordConfirm;
 	}
 
+	public Double getMatchPoint()
+	{
+		return matchPoint;
+	}
 
+	public void setMatchPoint(Double matchPoint)
+	{
+		this.matchPoint = matchPoint;
+	}
 }

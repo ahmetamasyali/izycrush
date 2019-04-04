@@ -12,5 +12,5 @@ public interface UserService{
 
 	User save(User user);
 
-	List<User> loadAllUsers();
+	List<User> loadAllUsers(User loggedInUser);
 }
