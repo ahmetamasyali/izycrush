@@ -80,9 +80,6 @@ public class SurveyServiceImpl implements SurveyService
 		List<Question> questions = questionService.loadQuestions();
 
 		double matchedQuestion = 0;
-		questions.forEach(question ->{
-
-		});
 		for(Question question : questions)
 		{
 			Survey survey1 = getByUserAndQuestion(user1.id, question.getQuestionNo());
@@ -94,7 +91,7 @@ public class SurveyServiceImpl implements SurveyService
 			}
 		}
 
-		return matchedQuestion / new Double(questions.size());
+		return matchedQuestion / new Double(questions.size())* 100;
 	}
 
 

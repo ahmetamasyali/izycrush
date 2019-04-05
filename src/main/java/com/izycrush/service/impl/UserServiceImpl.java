@@ -70,14 +70,14 @@ public class UserServiceImpl  implements UserDetailsService,UserService {
 		{
 			user.setMatchPoint(surveyService.calculateMatchPoint(loggedInUser, user));
 
-			if(user.getLastActivityDate().after(twoMinutesBeforeNow))
+			if(user.getLastActivityDate() != null && user.getLastActivityDate().after(twoMinutesBeforeNow))
 			{
 				user.setOnline(true);
 			}
 		}
 
-		userList.sort((u1, u2) -> u1.getMatchPoint().compareTo(u2.getMatchPoint()));
-		return userRepository.loadAllUsers();
+		userList.sort((u1, u2) -> u2.getMatchPoint().compareTo(u1.getMatchPoint()));
+		return userList;
 	}
 
 	@Override

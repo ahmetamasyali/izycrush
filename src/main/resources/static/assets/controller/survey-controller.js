@@ -1,16 +1,21 @@
-app.controller('surveyCtrl', ['$scope','$http','growl', function($scope, $http, growl) {
+app.controller('surveyCtrl', ['$scope','$http','growl','$state', function($scope, $http, growl, $state) {
 	$scope.isLoggedIn = isLoggedIn;
 	$scope.username = username;
 
-
+	if(!isLoggedIn){
+		$state.go('home');
+	}
 	var loadQuestions = function(){
 		$http.get('/loadSurvey/').then(function(response){
 			$scope.questions = response.data.data;
 
 			for(var i=0;i<$scope.questions.length ; i++){
-				if($scope.questions[i].response){
-					$scope.questions[i].agree = $scope.questions[i].response;
-					$scope.questions[i].disagree = !$scope.questions[i].response;
+				if($scope.questions[i].response != null){
+					if($scope.questions[i].response) {
+						$scope.questions[i].agree = "true";
+					}else {
+						$scope.questions[i].agree = "false";
+					}
 				}
 			}
 		});
@@ -21,8 +26,8 @@ app.controller('surveyCtrl', ['$scope','$http','growl', function($scope, $http, 
 	$scope.sendAnswers = function(){
 		$scope.answers = [];
 		for(var i=0;i<$scope.questions.length ; i++){
-			if($scope.questions[i].agree == true || $scope.questions[i].disagree == true){
-				$scope.answers.push({'questionNo':$scope.questions[i].questionNo, 'response': $scope.questions[i].agree == true});
+			if($scope.questions[i].agree){
+				$scope.answers.push({'questionNo':$scope.questions[i].questionNo, 'response': $scope.questions[i].agree == "true"});
 			}else{
 				growl.error("Tüm Soruları Cevaplamalısınız!");
 				return;
@@ -30,7 +35,7 @@ app.controller('surveyCtrl', ['$scope','$http','growl', function($scope, $http, 
 		}
 		$http.post('/saveSurvey/',$scope.answers).then(function(response){
 			growl.success("BAŞARILI!");
-			$state.go('home');
+			window.location.href = "/";
 		});
 	};
 

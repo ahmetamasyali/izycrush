@@ -4,19 +4,24 @@
     <h2>Anket</h2>
     <form>
         <div ng-repeat="question in questions">
-            <p >{{question.questionText}}</p>
+            <p >{{question.questionNo}}. {{question.questionText}}</p>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="true" ng-model="question.agree">
-                <label class="form-check-label" for="gridRadios1">
+                <input class="form-check-input" type="radio" name="{{question.questionNo}}" id="{{question.questionNo}}agree" value="true" ng-model="question.agree">
+                <label class="form-check-label" for="{{question.questionNo}}agree">
                     Katılıyorum
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="true" ng-model="question.disagree">
-                <label class="form-check-label" for="gridRadios2">
+                <input class="form-check-input" type="radio" name="{{question.questionNo}}" id="{{question.questionNo}}disagree" value="false" ng-model="question.agree">
+                <label class="form-check-label" for="{{question.questionNo}}disagree">
                     Katılmıyorum
                 </label>
             </div>
+            <br>
         </div>
+        <br>
+        <button type="button" class="btn btn-success " ng-click="sendAnswers()">Gönder</button>
+        <br>
+        <br>
     </form>
 </div>

@@ -7,6 +7,13 @@ app.controller('chatCtrl', ['$scope','$http','growl','$sce','$stateParams','$sta
 	$scope.openChat = function(conversationId){
 		$state.go('chat', {'conversationId': conversationId});
 	};
+
+	var loadAllConversations = function(){
+		$http.get('/loadConversations/').then(function(response){
+			$scope.allConversations = response.data.data;
+		});
+	};
+
 	$scope.loading = true;
 	if(!isLoggedIn){
 		$state.go('home');
@@ -27,11 +34,10 @@ app.controller('chatCtrl', ['$scope','$http','growl','$sce','$stateParams','$sta
 
 		});
 
-		$http.get('/loadConversations/').then(function(response){
-			$scope.allConversations = response.data.data;
-		});
-
+		loadAllConversations();
 	}
+
+	setInterval(() => loadAllConversations(), 5000);
 
 	$scope.logout = function(){
 		window.location.href = "/logout";

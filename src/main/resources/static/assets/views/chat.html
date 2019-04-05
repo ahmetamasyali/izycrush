@@ -21,12 +21,12 @@
                                 <div class="d-flex bd-highlight">
                                     <div class="img_cont">
                                         <img src="https://via.placeholder.com/448" class="rounded-circle user_img">
-                                        <span class="online_icon"></span>
+                                        <span class="online_icon" ng-class="{offline:!otherConversation.speakingPerson.online}"></span>
                                     </div>
                                     <div class="user_info">
                                         <span>{{otherConversation.speakingPerson.name}}</span>
-                                        <p ng-show="otherConversation.speakingPerson.isOnline">{{otherConversation.speakingPerson.name}} şu an Aktif</p>
-                                        <p ng-hide="otherConversation.speakingPerson.isOnline">Son görülme : {{otherConversation.speakingPerson.lastActivityDate | formatdate}}</p>
+                                        <p ng-show="otherConversation.speakingPerson.online">{{otherConversation.speakingPerson.name}} şu an Aktif</p>
+                                        <p ng-hide="otherConversation.speakingPerson.online">Son görülme : {{otherConversation.speakingPerson.lastActivityDate | formatdate}}</p>
                                     </div>
                                 </div>
                             </li>
@@ -42,7 +42,7 @@
                         <div class="d-flex bd-highlight">
                             <div class="img_cont">
                                 <img src="https://via.placeholder.com/448" class="rounded-circle user_img">
-                                <span class="online_icon"></span>
+                                <span class="online_icon" ng-class="{offline:!conversation.speakingPerson.online}"></span>
                             </div>
                             <div class="user_info">
                                 <span>{{conversation.speakingPerson.username}} ile Konuş</span>

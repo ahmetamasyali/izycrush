@@ -110,7 +110,8 @@ public class ConversationServiceImpl implements ConversationService
 				if(!conversationUserId.equals(userId))
 				{
 					conversation.setSpeakingPerson(userService.findById(conversationUserId));
-					if(conversation.getSpeakingPerson().getLastActivityDate().after(twoMinutesBeforeNow))
+					if(conversation.getSpeakingPerson().getLastActivityDate() != null
+							&& conversation.getSpeakingPerson().getLastActivityDate().after(twoMinutesBeforeNow))
 					{
 						conversation.getSpeakingPerson().setOnline(true);
 					}
@@ -140,7 +141,8 @@ public class ConversationServiceImpl implements ConversationService
 			{
 				conversation.setSpeakingPerson(userService.findById(userId));
 
-				if(conversation.getSpeakingPerson().getLastActivityDate().after(twoMinutesBeforeNow))
+				if(conversation.getSpeakingPerson().getLastActivityDate() != null
+						&& conversation.getSpeakingPerson().getLastActivityDate().after(twoMinutesBeforeNow))
 				{
 					conversation.getSpeakingPerson().setOnline(true);
 				}
