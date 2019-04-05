@@ -13,7 +13,7 @@ app.controller('registerCtrl',['$scope', '$http', function($scope,$http) {
 		}).then(function (success){
 			 if(success.data){
 				 if( success.data.status == 'SUCCESS'){
-					 $scope.message = success.data.message;
+					 $scope.message = 'BAŞARILI!';
 					 $scope.error = false;
 					 setTimeout(function() {
 						 window.location.href = "/login";

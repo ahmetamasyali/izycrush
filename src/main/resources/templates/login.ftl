@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
@@ -40,10 +40,10 @@
 					<strong> {{message}}</strong>
 				</div>
 				<input type="text" id="userName"
-					class="form-control input-sm chat-input" placeholder="username"
+					class="form-control input-sm chat-input" placeholder="Kullanıcı Adı"
 					ng-model="user.username" /> </br> <input id="userPassword"
 					class="form-control input-sm chat-input" type="password"
-					placeholder="password" ng-model="user.password" / /> </br>
+					placeholder="Şifre" ng-model="user.password" / /> </br>
 				<div class="wrapper">
 					<span class="group-btn"> <a ng-click="login()"
 						style="margin-right: 10px" class="btn btn-primary btn-md">Giriş Yap

@@ -63,7 +63,7 @@ public class AuthController extends BaseController {
 		}
 
 
-		return BaseResponse.error("Username Not Found");
+		return BaseResponse.error("Kullanıcı Adı Bulunamadı");
 	}
 
 	@RequestMapping("/register")
