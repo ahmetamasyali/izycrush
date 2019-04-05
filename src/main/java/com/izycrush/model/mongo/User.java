@@ -1,5 +1,6 @@
 package com.izycrush.model.mongo;
 
+import java.util.Date;
 import java.util.Set;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -25,6 +26,11 @@ public class User{
 
 	@JsonIgnore
     private Set<Role> roles;
+
+	private Date lastActivityDate;
+
+	@Transient
+	private boolean isOnline;
 	 
 	@Transient
 	private String password;
@@ -75,6 +81,26 @@ public class User{
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public Date getLastActivityDate()
+	{
+		return lastActivityDate;
+	}
+
+	public void setLastActivityDate(Date lastActivityDate)
+	{
+		this.lastActivityDate = lastActivityDate;
+	}
+
+	public boolean isOnline()
+	{
+		return isOnline;
+	}
+
+	public void setOnline(boolean online)
+	{
+		isOnline = online;
 	}
 
 	public String getPasswordConfirm() {

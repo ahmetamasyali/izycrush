@@ -30,7 +30,7 @@ app.controller('homeCtrl', ['$scope','$http','$state','growl', function($scope, 
 	$scope.surveyFilled = surveyFilled;
 
 
-	if(!surveyFilled){
+	if(isLoggedIn && !surveyFilled){
 		$state.go('survey');
 	}
 
@@ -73,7 +73,7 @@ app.controller('homeCtrl', ['$scope','$http','$state','growl', function($scope, 
 app.filter('formatdate', function($filter) {
 	return function(timestamp) {
 		var currentDate = new Date()
-		var toFormat = new Date(timestamp)
+		var toFormat = new Date(timestamp.replace(/-/g, '/'))
 		if(toFormat.getDate() == currentDate.getDate() && toFormat.getMonth() == currentDate.getMonth() && toFormat.getFullYear() == currentDate.getFullYear() ) {
 			return 'Bugün ' + $filter('date')(toFormat.getTime(), 'H:mm')
 		}

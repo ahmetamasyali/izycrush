@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,7 +58,7 @@ public class SurveyController extends BaseController {
 		return BaseResponse.success(questions);
 	}
 
-	@RequestMapping(value = "/saveSurvey", method = RequestMethod.POST)
+	@RequestMapping(value = "/saveSurvey", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public BaseResponse<Boolean> saveSurvey(@RequestBody List<Survey> surveys) throws IzycrushException
 	{

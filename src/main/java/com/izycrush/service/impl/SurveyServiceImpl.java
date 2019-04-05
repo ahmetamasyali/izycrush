@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.izycrush.model.mongo.Question;
@@ -12,6 +13,7 @@ import com.izycrush.model.mongo.User;
 import com.izycrush.repository.mongo.SurveyRepository;
 import com.izycrush.service.QuestionService;
 import com.izycrush.service.SurveyService;
+import com.izycrush.service.UserService;
 
 @Service
 public class SurveyServiceImpl implements SurveyService
@@ -24,6 +26,10 @@ public class SurveyServiceImpl implements SurveyService
 
 	@Autowired
 	private QuestionService questionService;
+
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
 
 	public SurveyServiceImpl(SurveyRepository surveyRepository) {
 		this.surveyRepository = surveyRepository;
@@ -47,6 +53,7 @@ public class SurveyServiceImpl implements SurveyService
 				saveSurvey(survey);
 			}
 		}
+		userService.save(user);
 	}
 
 	@Override

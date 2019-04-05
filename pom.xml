@@ -99,10 +99,10 @@
             <artifactId>jquery</artifactId>
             <version>3.1.0</version>
         </dependency>
-        <dependency>
+       <!-- <dependency>
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.mongo</artifactId>
-        </dependency>
+        </dependency><!-->
     </dependencies>
 
     <build>

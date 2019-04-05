@@ -25,7 +25,8 @@
                                     </div>
                                     <div class="user_info">
                                         <span>{{otherConversation.speakingPerson.name}}</span>
-                                        <p>{{otherConversation.speakingPerson.name}} şu an Aktif</p>
+                                        <p ng-show="otherConversation.speakingPerson.isOnline">{{otherConversation.speakingPerson.name}} şu an Aktif</p>
+                                        <p ng-hide="otherConversation.speakingPerson.isOnline">Son görülme : {{otherConversation.speakingPerson.lastActivityDate | formatdate}}</p>
                                     </div>
                                 </div>
                             </li>

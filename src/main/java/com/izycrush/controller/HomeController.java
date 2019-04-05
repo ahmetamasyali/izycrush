@@ -35,8 +35,11 @@ public class HomeController  extends BaseController {
 
 			Survey survey = surveyService.getByUserAndQuestion(user.id, 1);
 			model.addAttribute("surveyFilled", survey != null);
-		}else {
+		}
+		else
+		{
 			model.addAttribute("isLoggedIn", false);
+			model.addAttribute("surveyFilled", false);
 		}
 
 		return "home";

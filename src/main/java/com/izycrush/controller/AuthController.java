@@ -67,7 +67,7 @@ public class AuthController extends BaseController {
 	}
 
 	@RequestMapping("/register")
-	String homxe(Model model) {
+	public String register(Model model) {
 		if(isLoggedIn()) {
 			return "redirect:/";
 		}

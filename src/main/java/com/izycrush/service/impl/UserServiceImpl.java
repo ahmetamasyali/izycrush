@@ -1,5 +1,6 @@
 package com.izycrush.service.impl;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,6 +39,7 @@ public class UserServiceImpl  implements UserDetailsService,UserService {
 
 	public User save(User user) {
 		logger.debug("saving user");
+		user.setLastActivityDate(new Date());
 		return userRepository.save(user);
 	}
 
@@ -63,9 +65,15 @@ public class UserServiceImpl  implements UserDetailsService,UserService {
 	{
 		List<User> userList = userRepository.loadAllUsers();
 
+		Date twoMinutesBeforeNow = new Date(System.currentTimeMillis() - 2 *60 * 1000);
 		for(User user : userList)
 		{
 			user.setMatchPoint(surveyService.calculateMatchPoint(loggedInUser, user));
+
+			if(user.getLastActivityDate().after(twoMinutesBeforeNow))
+			{
+				user.setOnline(true);
+			}
 		}
 
 		userList.sort((u1, u2) -> u1.getMatchPoint().compareTo(u2.getMatchPoint()));

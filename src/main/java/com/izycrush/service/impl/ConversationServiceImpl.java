@@ -55,6 +55,7 @@ public class ConversationServiceImpl implements ConversationService
 
 		conversation.setLastMessageDate(messageDate);
 
+		userService.save(sender);
 		messageService.saveMessage(message);
 		this.saveConversation(conversation);
 
@@ -82,6 +83,7 @@ public class ConversationServiceImpl implements ConversationService
 		conversation.getUserIds().add(targetUser.id);
 
 		this.saveConversation(conversation);
+		userService.save(loggedInUser);
 
 		logger.info("New conversation created with id : " + conversation.id);
 		return conversation.id;
@@ -99,6 +101,7 @@ public class ConversationServiceImpl implements ConversationService
 	public List<Conversation> getByUserId(String userId)
 	{
 		List<Conversation> conversations = conversationRepository.getByUserId(userId);
+		Date twoMinutesBeforeNow = new Date(System.currentTimeMillis() - 2 *60 * 1000);
 
 		for(Conversation conversation : conversations)
 		{
@@ -107,6 +110,11 @@ public class ConversationServiceImpl implements ConversationService
 				if(!conversationUserId.equals(userId))
 				{
 					conversation.setSpeakingPerson(userService.findById(conversationUserId));
+					if(conversation.getSpeakingPerson().getLastActivityDate().after(twoMinutesBeforeNow))
+					{
+						conversation.getSpeakingPerson().setOnline(true);
+					}
+
 				}
 				conversation.setLastMessage(messageService.getLastByConversationId(conversation.id));
 			}
@@ -124,12 +132,18 @@ public class ConversationServiceImpl implements ConversationService
 	public Conversation loadConversationWithMessages(String conversationId, User loggedInUser) throws IzycrushException
 	{
 		Conversation conversation = this.getById(conversationId);
+		Date twoMinutesBeforeNow = new Date(System.currentTimeMillis() - 2 *60 * 1000);
 
 		for(String userId : conversation.getUserIds())
 		{
 			if(!userId.equals(loggedInUser.id))
 			{
 				conversation.setSpeakingPerson(userService.findById(userId));
+
+				if(conversation.getSpeakingPerson().getLastActivityDate().after(twoMinutesBeforeNow))
+				{
+					conversation.getSpeakingPerson().setOnline(true);
+				}
 			}
 		}
 		conversation.setMessages(messageService.loadConversationMessages(loggedInUser, conversation.id));
