@@ -95,10 +95,13 @@
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i
-											class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-								<input type='file' maxsize="5120" required ng-model='profileImage' base-sixty-four-input>
+											class="fa fa-upload fa-lg" aria-hidden="true"></i></span>
+								<input ng-show="!profileImage" title="your text" class="custom-file-input" type='file' maxsize="5120" required ng-model='profileImage' base-sixty-four-input>
+								<img ng-show="profileImage" src="data:image/png;base64,{{profileImage.base64}}" class="rounded-circle user_img_msg">
 
 							</div>
+							<button ng-show="profileImage" style="width: 20%;" type="button" ng-click="profileImage = null"
+									class="btn btn-danger btn-sm btn-block">Sil</button>
 						</div>
 					</div>
 
