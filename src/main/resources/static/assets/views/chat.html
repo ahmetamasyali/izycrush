@@ -20,7 +20,7 @@
                                 ng-click="openChat(otherConversation.id)">
                                 <div class="d-flex bd-highlight">
                                     <div class="img_cont">
-                                        <img src="https://via.placeholder.com/448" class="rounded-circle user_img">
+                                        <img src="data:image/png;base64,{{otherConversation.speakingPerson.profileImage}}" class="rounded-circle user_img">
                                         <span class="online_icon" ng-class="{offline:!otherConversation.speakingPerson.online}"></span>
                                     </div>
                                     <div class="user_info">
@@ -41,7 +41,7 @@
                     <div class="card-header msg_head">
                         <div class="d-flex bd-highlight">
                             <div class="img_cont">
-                                <img src="https://via.placeholder.com/448" class="rounded-circle user_img">
+                                <img src="data:image/png;base64,{{conversation.speakingPerson.profileImage}}" class="rounded-circle user_img">
                                 <span class="online_icon" ng-class="{offline:!conversation.speakingPerson.online}"></span>
                             </div>
                             <div class="user_info">
@@ -64,7 +64,7 @@
                             <div class="d-flex justify-content-start mb-4"
                                  ng-show="message.sender.username != username">
                                 <div class="img_cont_msg">
-                                    <img src="https://via.placeholder.com/150" class="rounded-circle user_img_msg">
+                                    <img src="data:image/png;base64,{{conversation.speakingPerson.profileImage}}" class="rounded-circle user_img_msg">
                                 </div>
                                 <div class="msg_cotainer">
                                     <span ng-bind-html="renderHTML(message.value)"> ></span>
@@ -78,7 +78,7 @@
                                         <span class="msg_time_send">{{message.sentDate | formatdate}}</span>
                                     </div>
                                     <div class="img_cont_msg">
-                                        <img src="https://via.placeholder.com/150" class="rounded-circle user_img_msg">
+                                        <img src="data:image/png;base64,{{profileImage}}" class="rounded-circle user_img_msg">
                                     </div>
                                 </div>
                             </div>

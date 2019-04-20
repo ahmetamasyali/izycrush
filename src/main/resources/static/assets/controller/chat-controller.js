@@ -3,7 +3,7 @@ app.controller('chatCtrl', ['$scope','$http','growl','$sce','$stateParams','$sta
 	$scope.username = username;
 	$scope.conversationId = $stateParams.conversationId;
 	$scope.messages = [];
-
+	$scope.profileImage = profileImage;
 	$scope.openChat = function(conversationId){
 		$state.go('chat', {'conversationId': conversationId});
 	};

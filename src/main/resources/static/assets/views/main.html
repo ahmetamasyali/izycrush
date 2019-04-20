@@ -6,8 +6,7 @@
             <div class="col-md-6" ng-repeat="user in allUsers">
                 <div class="d-flex flex-row border rounded">
                     <div class="p-0 w-25">
-                        <img src="https://via.placeholder.com/448" class="img-thumbnail border-0" />
-
+                        <img src="data:image/png;base64,{{user.profileImage}}" width="448" height="448" class="img-thumbnail border-0">
                     </div>
                     <div class="pl-3 pt-2 pr-2 pb-2 w-75 border-left">
                         <h4 class="text-primary">{{user.name}}</h4>

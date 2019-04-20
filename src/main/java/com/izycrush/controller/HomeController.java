@@ -32,6 +32,7 @@ public class HomeController  extends BaseController {
 			User user = getUser();
 			model.addAttribute("isLoggedIn", true);
 			model.addAttribute("username", user.getUsername());
+			model.addAttribute("profileImage", user.getProfileImage());
 
 			Survey survey = surveyService.getByUserAndQuestion(user.id, 1);
 			model.addAttribute("surveyFilled", survey != null);

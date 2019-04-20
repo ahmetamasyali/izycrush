@@ -12,6 +12,7 @@
 <!-- Website Font style -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/angular-growl.css">
 
 <!-- Google Fonts -->
 <link href='https://fonts.googleapis.com/css?family=Passion+One'
@@ -89,6 +90,19 @@
 						</div>
 					</div>
 
+					<div class="form-group">
+						<label for="confirm" class="cols-sm-2 control-label">Profil Resmi</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+											class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+								<input type='file' maxsize="5120" required ng-model='profileImage' base-sixty-four-input>
+
+							</div>
+						</div>
+					</div>
+
+
 					<div class="form-group ">
 						<button type="button" ng-click="register()"
 							class="btn btn-primary btn-lg btn-block login-button">Kayıt Ol</button>
@@ -102,7 +116,11 @@
 	</div>
 
 	<script type="text/javascript" src="assets/js/angular.min.js"></script>
-	<script type="text/javascript"
-		src="assets/controller/register-controller.js"></script>
+	<script type="text/javascript" src="assets/js/angular-growl.min.js"></script>
+	<script type="text/javascript" src="assets/js/angular-base64-upload.min.js"></script>
+	<script type="text/javascript" src="assets/controller/register-controller.js"></script>
+
+
 </body>
+<div growl></div>
 </html>

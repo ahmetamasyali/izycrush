@@ -30,6 +30,7 @@
 <script type="text/javascript">
     var isLoggedIn = ${isLoggedIn?c};
     var username = "${username!}";
+    var profileImage = "${profileImage!}";
     var surveyFilled = ${surveyFilled?c};
 </script>
 <script type="text/javascript" src="assets/js/angular.min.js"></script>

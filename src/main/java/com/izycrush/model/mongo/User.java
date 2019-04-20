@@ -29,6 +29,8 @@ public class User{
 
 	private Date lastActivityDate;
 
+	private String profileImage;
+
 	@Transient
 	private boolean isOnline;
 	 
@@ -91,6 +93,16 @@ public class User{
 	public void setLastActivityDate(Date lastActivityDate)
 	{
 		this.lastActivityDate = lastActivityDate;
+	}
+
+	public String getProfileImage()
+	{
+		return profileImage;
+	}
+
+	public void setProfileImage(String profileImage)
+	{
+		this.profileImage = profileImage;
 	}
 
 	public boolean isOnline()
