@@ -32,7 +32,7 @@
 				</div>
 			</div>
 			<div class="main-login main-center">
-				<form class="form-horizontal" method="post" action="#">
+				<form name="myform" class="form-horizontal" method="post" action="#">
 					<div class="alert alert-success" ng-show="!error && message">
 						<strong>{{message}}!</strong>
 					</div>
@@ -42,6 +42,7 @@
 					<div class="form-group">
 						<label for="name" class="cols-sm-2 control-label">İsim</label>
 						<div class="cols-sm-10">
+							<p class="required-text" ng-show="myform.name.$error.required">*Ad Zorunludur</p>
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa"
 									aria-hidden="true"></i></span> <input type="text" class="form-control"
@@ -54,6 +55,7 @@
 					<div class="form-group">
 						<label for="username" class="cols-sm-2 control-label">Kullanıcı Adı</label>
 						<div class="cols-sm-10">
+							<p class="required-text" ng-show="myform.username.$error.required">*Kullanıcı Adı Zorunludur</p>
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-users fa"
 									aria-hidden="true"></i></span> <input type="text" class="form-control"
@@ -66,6 +68,7 @@
 					<div class="form-group">
 						<label for="password" class="cols-sm-2 control-label">Şifre</label>
 						<div class="cols-sm-10">
+							<p class="required-text" ng-show="myform.password.$error.required">*Şifre Zorunludur</p>
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="fa fa-lock fa-lg" aria-hidden="true"></i></span> <input
@@ -78,6 +81,7 @@
 					<div class="form-group">
 						<label for="confirm" class="cols-sm-2 control-label">Şifreyi Tekrar Gir</label>
 						<div class="cols-sm-10">
+							<p class="required-text" ng-show="myform.confirm.$error.required">*Şifreyi Tekrar Gir Zorunludur</p>
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="fa fa-lock fa-lg" aria-hidden="true"></i></span> <input
@@ -91,11 +95,12 @@
 					<div class="form-group">
 						<label for="confirm" class="cols-sm-2 control-label">Profil Resmi</label>
 						<div class="cols-sm-10">
+							<p class="required-text" ng-show="!profileImage">*Profil Resmi Zorunludur</p>
 							<div class="input-group">
 								<span class="input-group-addon"><i
 											class="fa fa-upload fa-lg" aria-hidden="true"></i></span>
 								<input ng-show="!profileImage" title="your text" class="custom-file-input" type='file' maxsize="5120" required ng-model='profileImage' base-sixty-four-input>
-								<img ng-show="profileImage" src="data:image/png;base64,{{profileImage.base64}}" class="rounded-circle user_img_msg">
+								<img ng-if="profileImage" src="data:image/png;base64,{{profileImage.base64}}" class="rounded-circle user_img_msg">
 
 							</div>
 							<button ng-show="profileImage" style="width: 20%;" type="button" ng-click="profileImage = null"
@@ -117,10 +122,11 @@
 					<div class="form-group">
 						<label for="description" class="cols-sm-2 control-label">Cinsiyet</label>
 						<div class="cols-sm-10">
+							<p class="required-text" ng-show="myform.gender.$error.required">*Cinsiyet Zorunludur</p>
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-users fa"
 																   aria-hidden="true"></i></span>
-								<select class="span9" ng-model="user.gender">
+								<select name="gender" ng-model="user.gender" ng-required="true">
 									<option value="MALE">Erkek</option>
 									<option value="FEMALE">Kadın</option>
 								</select>
@@ -129,8 +135,8 @@
 					</div>
 
 					<div class="form-group ">
-						<button type="button" ng-click="register()"
-							class="btn btn-primary btn-lg btn-block login-button">Kayıt Ol</button>
+						<button type="button" ng-disabled="!myform.$valid" ng-click="register()"
+							class="btn btn-success btn-lg btn-block login-button">Kayıt Ol</button>
 					</div>
 					<div class="login-register">
 						<a class="btn btn-primary" href="login">Giriş Yap</a>
