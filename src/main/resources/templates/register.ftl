@@ -112,7 +112,7 @@
 						<label for="description" class="cols-sm-2 control-label">Hakkımda</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-users fa"
+								<span class="input-group-addon"><i class="fa fa-comment fa"
 																   aria-hidden="true"></i></span> <textarea type="text" class="form-control"
 																										 ng-model="user.description" name="description" id="description"
 																											placeholder="Hakkımdayı Doldurun" ></textarea>
@@ -124,7 +124,7 @@
 						<div class="cols-sm-10">
 							<p class="required-text" ng-show="myform.gender.$error.required">*Cinsiyet Zorunludur</p>
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-users fa"
+								<span class="input-group-addon"><i class="fa fa-venus-mars fa"
 																   aria-hidden="true"></i></span>
 								<select name="gender" ng-model="user.gender" ng-required="true">
 									<option value="MALE">Erkek</option>
