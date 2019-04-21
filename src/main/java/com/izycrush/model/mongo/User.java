@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.izycrush.enums.Gender;
 import com.izycrush.enums.Role;
 
 @Document(collection = "user")
@@ -30,6 +31,10 @@ public class User{
 	private Date lastActivityDate;
 
 	private String profileImage;
+
+	private String description;
+
+	private Gender gender;
 
 	@Transient
 	private boolean isOnline;
@@ -103,6 +108,26 @@ public class User{
 	public void setProfileImage(String profileImage)
 	{
 		this.profileImage = profileImage;
+	}
+
+	public String getDescription()
+	{
+		return description;
+	}
+
+	public void setDescription(String description)
+	{
+		this.description = description;
+	}
+
+	public Gender getGender()
+	{
+		return gender;
+	}
+
+	public void setGender(Gender gender)
+	{
+		this.gender = gender;
 	}
 
 	public boolean isOnline()

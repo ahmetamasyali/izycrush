@@ -45,13 +45,11 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa"
 									aria-hidden="true"></i></span> <input type="text" class="form-control"
-									ng-model="user.name" name="name" id="name"
+									ng-model="user.name" name="name" id="name" ng-required="true"
 									placeholder="İsminizi Girin" />
 							</div>
 						</div>
 					</div>
-
-
 
 					<div class="form-group">
 						<label for="username" class="cols-sm-2 control-label">Kullanıcı Adı</label>
@@ -59,7 +57,7 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-users fa"
 									aria-hidden="true"></i></span> <input type="text" class="form-control"
-									ng-model="user.username" name="username" id="username"
+									ng-model="user.username" name="username" id="username" ng-required="true"
 									placeholder="Kullanıcı Adınızı Girin" />
 							</div>
 						</div>
@@ -71,7 +69,7 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="fa fa-lock fa-lg" aria-hidden="true"></i></span> <input
-									ng-model="user.password" type="password" class="form-control"
+									ng-model="user.password" type="password" class="form-control" ng-required="true"
 									name="password" id="password" placeholder="Şifrenizi Girin" />
 							</div>
 						</div>
@@ -83,7 +81,7 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="fa fa-lock fa-lg" aria-hidden="true"></i></span> <input
-									ng-model="user.passwordConfirm" type="password"
+									ng-model="user.passwordConfirm" type="password" ng-required="true"
 									class="form-control" name="confirm" id="confirm"
 									placeholder="Şifrenizi Doğrulayın" />
 							</div>
@@ -105,13 +103,37 @@
 						</div>
 					</div>
 
+					<div class="form-group">
+						<label for="description" class="cols-sm-2 control-label">Hakkımda</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-users fa"
+																   aria-hidden="true"></i></span> <textarea type="text" class="form-control"
+																										 ng-model="user.description" name="description" id="description"
+																											placeholder="Hakkımdayı Doldurun" ></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="description" class="cols-sm-2 control-label">Cinsiyet</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-users fa"
+																   aria-hidden="true"></i></span>
+								<select class="span9" ng-model="user.gender">
+									<option value="MALE">Erkek</option>
+									<option value="FEMALE">Kadın</option>
+								</select>
+							</div>
+						</div>
+					</div>
 
 					<div class="form-group ">
 						<button type="button" ng-click="register()"
 							class="btn btn-primary btn-lg btn-block login-button">Kayıt Ol</button>
 					</div>
 					<div class="login-register">
-						<a href="login">Giriş Yap</a>
+						<a class="btn btn-primary" href="login">Giriş Yap</a>
 					</div>
 				</form>
 			</div>
