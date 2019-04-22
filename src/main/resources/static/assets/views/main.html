@@ -13,6 +13,8 @@
                         <h5 class="text-info">{{user.username}}</h5>
                         <p ng-show="user.online">{{otherConversation.speakingPerson.name}} şu an Aktif</p>
                         <p ng-hide="user.online">Son görülme : {{user.lastActivityDate | formatdate}}</p>
+                        <p ng-show="user.gender == 'MALE'">Cinsiyet: Erkek</p>
+                        <p ng-show="user.gender == 'FEMALE'">Cinsiyet: Kadın</p>
                         <p>Eşleşme Yüzdesi : {{user.matchPoint  | number : 0}}</p>
 
                         <p class="text-right m-0"><a ng-click="sendMessage(user.username)" class="btn btn-primary"><i class="far fa-user"></i> Mesaj Gönder</a></p>

@@ -46,7 +46,7 @@
 					placeholder="Şifre" ng-model="user.password" / /> </br>
 				<div class="wrapper">
 					<span class="group-btn"> <a ng-click="login()"
-						style="margin-right: 10px" class="btn btn-primary btn-md">Giriş Yap
+						style="margin-right: 10px" class="btn btn-success btn-md">Giriş Yap
 							<i class="fa fa-sign-in"></i> <a href="register"
 							class="btn btn-primary btn-md">Kayıt Ol <i
 								class="fa fa-sign-in"></i></a></span>
