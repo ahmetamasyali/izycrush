@@ -4,5 +4,5 @@ spring:
   data:
     mongodb:
       database: izycrush
-      host: localhost
+      host: izycrushmongo
       port: 27017

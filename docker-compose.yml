@@ -1,0 +1,19 @@
+version: '2.0'
+services:
+  izycrushmongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ~/data:/data/db
+    networks:
+      - izycrushnetwork
+  izycrush:
+    build: .
+    ports:
+    - 8080:8080
+    networks:
+     - izycrushnetwork
+networks:
+  izycrushnetwork:
+     driver: bridge
